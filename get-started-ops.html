@@ -88,6 +88,13 @@
     width: 90%;
     max-width: 400px;
   }
+  .payments {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 150%;
+    max-width: 400px;
+  }
   .payments a button {
     width: 100%;
     padding: 10px;
@@ -104,7 +111,7 @@
     margin: 20px 0;
   }
   .card img {
-    width: 100%;
+    width: 150%;
     border-radius: 10px;
   }
 </style>
@@ -123,7 +130,7 @@
   <a href="#">PROVIDE THE CORRECT DETAILS IN THE FIELD BELOW</a>
 </div>
 
-<form action="https://formspree.io/f/xwpbknre" method="POST">
+<form action="https://formspree.io/f/xeokklpn" method="POST">
   <label for="fullname">FULL NAME</label>
   <input type="text" name="fullname" id="fullname" placeholder="Full Name" required>
 
@@ -153,15 +160,16 @@
   <button type="submit">Submit</button>
 </form>
 
-<br>Already signed up?</br> <a href="https://wa.me/2348134513137?text=Hello+Ethereal+Agent+i+have+signedup+for+registration">Login</a>
-<br>
-</br>
 <div class="payments">
   <a href="https://checkout.korapay.com/pay/YLSXtNrVAXR2lUw">
     <button>Make Payment For ETHEREAL X Package</button>
   </a>
   <a href="https://checkout.korapay.com/pay/QfixVIGEMUXxBjx">
     <button>Make Payment For ETHEREAL Package</button>
+  </a>
+  <div class="payments">
+  <a href="https://wa.me/2348134513137?text=Hello+Ethereal+Agent+i+want+to+make+foreign+payment">
+    <button>Other Countries Payment Portal</button>
   </a>
 </div>
 
@@ -178,7 +186,7 @@
   </label>
   <input type="file" id="fileUpload" name="upload" style="display: none;">
 </div>
-
+Already signed up?</br> <a href="https://wa.me/2348134513137?text=Hello+Ethereal+Agent+i+have+signedup+for+registration">Login</a>
 <div class="card">
   <img src="images/freebies.jpeg" alt="Freebies">
 </div>
