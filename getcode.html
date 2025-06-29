@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Purchase Coupon - ETHEREAL</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    :root {
+      --bg-dark: #1a472a;
+      --bg-light: #f7f7f7;
+      --card-dark: #0b3d26;
+      --card-light: #ffffff;
+      --text-dark: #ffffff;
+      --text-light: #111111;
+      --primary: #00ffcc;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .toggle-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .toggle-container button {
+      background: transparent;
+      border: none;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .card {
+      background-color: var(--card-dark);
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    p {
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #ffffff;
+      color: #000000;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--primary);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Light Mode Styles */
+    body.light-mode {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body.light-mode .card {
+      background-color: var(--card-light);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    }
+
+    body.light-mode .toggle-container button {
+      color: var(--text-light);
+    }
+
+    body.light-mode button {
+      background-color: var(--bg-dark);
+      color: white;
+    }
+
+    body.light-mode button:hover {
+      background-color: #0b3d26;
+    }
+
+    body.light-mode a {
+      color: #00785c;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toggle-container">
+  <button id="toggleTheme" title="Toggle Mode">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
+</div>
+
+<div class="card">
+  <h2 id="planText">Loading...</h2>
+  <p>Click below to purchase your coupon code for this package.</p>
+  <button id="purchaseBtn">PURCHASE COUPON CODE</button>
+  <a href="signup.html">← Go Back to Signup</a>
+</div>
+
+<script>
+  // Handle plan from query
+  const queryParams = new URLSearchParams(window.location.search);
+  const plan = queryParams.get('plan');
+  const btn = document.getElementById('purchaseBtn');
+  const planText = document.getElementById('planText');
+
+  let paymentLink = '';
+  let couponCode = '';
+  let username = localStorage.getItem('ethereal_user') || 'USER' + Math.floor(Math.random() * 9000 + 1000);
+
+  if (plan === '14k') {
+    planText.innerText = "ETHEREAL X - ₦14,000";
+    paymentLink = "https://checkout.korapay.com/pay/YLSXtNrVAXR2lUw";
+  } else if (plan === '9k') {
+    planText.innerText = "ETHEREAL - ₦9,000";
+    paymentLink = "https://checkout.korapay.com/pay/QfixVIGEMUXxBjx";
+  } else {
+    planText.innerText = "Invalid Package Selected";
+    btn.style.display = "none";
+  }
+
+  // Generate unique coupon
+  couponCode = `${username}_ETHEREAL`;
+  localStorage.setItem('ethereal_user', username);
+  localStorage.setItem('ethereal_coupon', couponCode);
+
+  btn.addEventListener('click', () => {
+    window.location.href = paymentLink;
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('toggleTheme');
+  const themeIcon = document.getElementById('themeIcon');
+
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    themeIcon.classList.toggle('fa-sun');
+    themeIcon.classList.toggle('fa-moon');
+  });
+</script>
+
+</body>
+</html>
