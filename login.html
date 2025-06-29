@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - ETHEREAL</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg-dark: #1a472a;
+      --bg-light: #f1f1f1;
+      --card-dark: #0b3d26;
+      --card-light: #fff;
+      --text-dark: #fff;
+      --text-light: #111;
+      --shadow-glow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .toggle-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .toggle-container button {
+      background: transparent;
+      border: none;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    form {
+      background-color: var(--card-dark);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: var(--shadow-glow);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    input::placeholder {
+      color: #ccc;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 12px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00ffcc;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+      font-weight: bold;
+      text-align: center;
+      display: none;
+    }
+
+    /* Light Mode */
+    body.light-mode {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body.light-mode form {
+      background-color: var(--card-light);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    body.light-mode input {
+      background-color: #eee;
+      color: #111;
+    }
+
+    body.light-mode input::placeholder {
+      color: #888;
+    }
+
+    body.light-mode button {
+      background: #1a472a;
+      color: #fff;
+    }
+
+    body.light-mode button:hover {
+      background: #0b3d26;
+    }
+
+    body.light-mode .toggle-container button {
+      color: #111;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toggle-container">
+  <button id="toggleTheme" title="Toggle Mode">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
+</div>
+
+<form id="loginForm">
+  <h2>Login to <span style="color: #00ffcc;">ETHEREAL</span></h2>
+
+  <label for="username">USERNAME</label>
+  <input type="text" id="username" placeholder="Enter your username" required />
+
+  <label for="coupon">COUPON CODE</label>
+  <input type="text" id="coupon" placeholder="Enter your coupon code" required />
+
+  <button type="submit">Login</button>
+
+  <div class="error" id="errorMsg">❌ Invalid credentials. Please check your coupon code.</div>
+</form>
+
+<script>
+  // Login logic
+  const form = document.getElementById('loginForm');
+  const errorMsg = document.getElementById('errorMsg');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById('username').value.trim();
+    const coupon = document.getElementById('coupon').value.trim();
+    const storedCoupon = localStorage.getItem('ethereal_coupon');
+    const storedUser = localStorage.getItem('ethereal_user');
+
+    if (
+      coupon === storedCoupon &&
+      (storedUser === null || username === storedUser) // match username if stored
+    ) {
+      const message = encodeURIComponent(`Hello Ethereal Agent, my username is ${username} and I’ve successfully registered.`);
+      window.location.href = `https://wa.me/2348134513137?text=${message}`;
+    } else {
+      errorMsg.style.display = 'block';
+    }
+  });
+
+  // Toggle Theme
+  const toggleBtn = document.getElementById('toggleTheme');
+  const themeIcon = document.getElementById('themeIcon');
+
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    themeIcon.classList.toggle('fa-sun');
+    themeIcon.classList.toggle('fa-moon');
+  });
+</script>
+
+</body>
+</html>
