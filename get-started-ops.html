@@ -1,147 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Signup Page</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #1a472a; /* green background */
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  header {
-    width: 100%;
-    background-color: #0b3d26;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
-  .logo {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-  }
-  .dark-mode-toggle {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .action-buttons a {
-    display: block;
-    text-align: center;
-    margin: 20px 0;
-    background: #fff;
-    color: #000;
-    padding: 10px 20px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  form {
-    background-color: #0b3d26;
-    padding: 20px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-  }
-  form label {
-    display: block;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-  form input, form select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-  }
-  form button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 10px;
-    background: rgb(92, 168, 117);
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  #drop-zone {
-    margin: 20px 0;
-    text-align: center;
-  }
-  #drop-zone input {
-    margin-top: 10px;
-  }
-  .payments {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 90%;
-    max-width: 400px;
-  }
-  .payments {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 150%;
-    max-width: 400px;
-  }
-  .payments a button {
-    width: 100%;
-    padding: 10px;
-    background: #fff;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .card {
-    width: 90%;
-    max-width: 400px;
-    margin: 20px 0;
-  }
-  .card img {
-    width: 150%;
-    border-radius: 10px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup - ETHEREAL</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-dark: #1a472a;
+      --bg-light: #f7f7f7;
+      --card-dark: #0b3d26;
+      --card-light: #ffffff;
+      --text-dark: #ffffff;
+      --text-light: #111111;
+      --primary: #00ffcc;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 60px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    header {
+      width: 100%;
+      background-color: var(--card-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .toggle-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .toggle-container button {
+      background: transparent;
+      border: none;
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    form {
+      background-color: var(--card-dark);
+      padding: 25px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 420px;
+      margin-top: 30px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    form button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: var(--primary);
+    }
+
+    #coupon-section {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #getCodeLink {
+      color: var(--primary);
+      font-size: 0.9rem;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .success-popup {
+      display: none;
+      background: #0f0;
+      color: #000;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    a.login-link {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Light Mode */
+    body.light-mode {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body.light-mode .logo {
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode form {
+      background-color: var(--card-light);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode input, body.light-mode select {
+      background: #f1f1f1;
+      color: #111;
+    }
+
+    body.light-mode button {
+      background-color: var(--bg-dark);
+      color: #fff;
+    }
+
+    body.light-mode .toggle-container button {
+      color: #111;
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <img src="images/ethereallogo.jpeg" class="logo" alt="logo">
-  <div class="dark-mode-toggle">
-    <i class="fa fa-bell"></i>
-    <button class="toggle-btn"><i class="fa fa-moon"></i></button>
-  </div>
-</header>
-
-<div class="action-buttons">
-  <a href="#">PROVIDE THE CORRECT DETAILS IN THE FIELD BELOW</a>
+<div class="toggle-container">
+  <button id="toggleTheme" title="Toggle Mode">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </button>
 </div>
 
-<form action="https://formspree.io/f/xeokklpn" method="POST">
+<header>
+  <img src="images/ethereallogo.jpeg" class="logo" alt="logo">
+</header>
+
+<form id="signupForm" action="https://formspree.io/f/xeokklpn" method="POST">
   <label for="fullname">FULL NAME</label>
-  <input type="text" name="fullname" id="fullname" placeholder="Full Name" required>
+  <input type="text" name="fullname" id="fullname" required>
 
   <label for="username">USERNAME</label>
-  <input type="text" name="username" id="username" placeholder="Username" required>
+  <input type="text" name="username" id="username" required>
 
   <label for="phone">PHONE NUMBER</label>
-  <input type="tel" name="phone" id="phone" placeholder="Phone Number" required>
+  <input type="tel" name="phone" id="phone" required>
 
   <label for="email">E-MAIL</label>
-  <input type="email" name="email" id="email" placeholder="Email" required>
+  <input type="email" name="email" id="email" required>
 
   <label for="country">COUNTRY</label>
   <select name="country" id="country" required>
@@ -153,43 +205,80 @@
   <label for="plans">PLANS</label>
   <select name="plans" id="plans" required>
     <option value="">Select package</option>
-    <option value="ETHEREAL-(₦9,000)">ETHEREAL-(₦9,000)</option>
-    <option value="ETHEREAL X-(₦14,000)">ETHEREAL X-(₦14,000)</option>
+    <option value="ETHEREAL - ₦9,000">ETHEREAL - ₦9,000</option>
+    <option value="ETHEREAL X - ₦14,000">ETHEREAL X - ₦14,000</option>
   </select>
+
+  <div id="coupon-section">
+    <label for="coupon">COUPON CODE</label>
+    <input type="text" name="coupon" id="coupon" readonly placeholder="Coupon will appear here">
+    <a href="#" id="getCodeLink">Get Code</a>
+  </div>
 
   <button type="submit">Submit</button>
 </form>
 
-<div class="payments">
-  <a href="https://checkout.korapay.com/pay/YLSXtNrVAXR2lUw">
-    <button>Make Payment For ETHEREAL X Package</button>
-  </a>
-  <a href="https://checkout.korapay.com/pay/QfixVIGEMUXxBjx">
-    <button>Make Payment For ETHEREAL Package</button>
-  </a>
-  <div class="payments">
-  <a href="https://wa.me/2348134513137?text=Hello+Ethereal+Agent+i+want+to+make+foreign+payment">
-    <button>Other Countries Payment Portal</button>
-  </a>
+<div class="success-popup" id="successPopup">
+  YOU HAVE SUCCESSFULLY SIGNED UP FOR ETHEREAL. <br/>
+  <a href="login.html" class="login-link">Go and Login</a>
 </div>
 
-<div style="margin: 20px 0; font-family: sans-serif;">
-  <label for="fileUpload" style="
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0b520d;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-  ">
-    📎 Attach Receipt of Payment
-  </label>
-  <input type="file" id="fileUpload" name="upload" style="display: none;">
-</div>
-Already signed up?</br> <a href="https://wa.me/2348134513137?text=Hello+Ethereal+Agent+i+have+signedup+for+registration">Login</a>
-<div class="card">
-  <img src="images/freebies.jpeg" alt="Freebies">
-</div>
+<script>
+  const planSelect = document.getElementById('plans');
+  const couponSection = document.getElementById('coupon-section');
+  const getCodeLink = document.getElementById('getCodeLink');
+  const couponInput = document.getElementById('coupon');
+  const form = document.getElementById('signupForm');
+  const popup = document.getElementById('successPopup');
+
+  // Show coupon section if 9k or 14k selected
+  planSelect.addEventListener('change', () => {
+    const plan = planSelect.value;
+    if (plan.includes('₦14,000') || plan.includes('₦9,000')) {
+      couponSection.style.display = 'block';
+    } else {
+      couponSection.style.display = 'none';
+    }
+  });
+
+  // Link to coupon purchase
+  getCodeLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    const plan = planSelect.value;
+    if (!plan) {
+      alert("Please select a package first.");
+      return;
+    }
+    const query = encodeURIComponent(plan.includes('14') ? '14k' : '9k');
+    localStorage.setItem('ethereal_user', document.getElementById('username').value.trim());
+    window.location.href = `getcode.html?plan=${query}`;
+  });
+
+  // Fill coupon from localStorage
+  const storedCoupon = localStorage.getItem('ethereal_coupon');
+  if (storedCoupon) {
+    couponInput.value = storedCoupon;
+    couponSection.style.display = 'block';
+  }
+
+  // Display popup after form submit
+  form.addEventListener('submit', (e) => {
+    setTimeout(() => {
+      popup.style.display = 'block';
+    }, 500);
+  });
+
+  // Theme toggle
+  const toggleBtn = document.getElementById('toggleTheme');
+  const themeIcon = document.getElementById('themeIcon');
+
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    themeIcon.classList.toggle('fa-sun');
+    themeIcon.classList.toggle('fa-moon');
+  });
+</script>
 
 </body>
 </html>
+
